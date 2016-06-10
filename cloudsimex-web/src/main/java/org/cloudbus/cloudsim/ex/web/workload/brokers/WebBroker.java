@@ -311,7 +311,7 @@ public class WebBroker extends MonitoringBorkerEX {
     protected void processOtherEvent(final SimEvent ev) {
         switch (ev.getTag()) {
         case TIMER_TAG:
-            if (CloudSim.clock() < getLifeLength()) {
+            if (CloudSim.clock() < getLifeLength() || getLifeLength() == -1) {
                 send(getId(), stepPeriod, TIMER_TAG);
                 generateWorkload();
             }
@@ -429,7 +429,7 @@ public class WebBroker extends MonitoringBorkerEX {
     protected void processCloudletReturn(final SimEvent ev) {
         super.processCloudletReturn(ev);
         Cloudlet cloudlet = (Cloudlet) ev.getData();
-        if (CloudSim.clock() < getLifeLength()) {
+        if (CloudSim.clock() < getLifeLength() || getLifeLength() == -1) {
             // kill the broker only if its life length is over/expired
             if (cloudlet instanceof WebCloudlet) {
                 updateSessions(((WebCloudlet) cloudlet).getSessionId());

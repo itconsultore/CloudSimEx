@@ -137,19 +137,19 @@ public class MonitoringBorkerEX extends DatacenterBrokerEX {
     protected void processOtherEvent(SimEvent ev) {
         switch (ev.getTag()) {
         case BROKER_MEASURE_UTIL_NOW:
-            if (CloudSim.clock() <= getLifeLength()) {
+            if (CloudSim.clock() <= getLifeLength() || getLifeLength() == -1) {
                 measureUtil();
                 send(getId(), monitoringPeriod, BROKER_MEASURE_UTIL_NOW);
             }
             break;
         case BROKER_AUTOSCALE_NOW:
-            if (CloudSim.clock() <= getLifeLength()) {
+            if (CloudSim.clock() <= getLifeLength() || getLifeLength() == -1) {
                 autoscale();
                 send(getId(), autoScalePeriod, BROKER_AUTOSCALE_NOW);
             }
             break;
         case BROKER_RECORD_UTIL_NOW:
-            if (CloudSim.clock() <= getLifeLength()) {
+            if (CloudSim.clock() <= getLifeLength() || getLifeLength()==-1) {
                 recordUtil();
                 if (utilisationRecorddDelta > 0 && (ev.getData() instanceof Boolean) && ((Boolean) ev.getData())) {
                     send(getId(), utilisationRecorddDelta, BROKER_RECORD_UTIL_NOW, Boolean.TRUE);

@@ -313,6 +313,18 @@ public class DatacenterBrokerEX extends DatacenterBroker {
         }
     }
 
+    @Override
+    public void shutdownEntity() {
+        if (this.getState()==RUNNABLE){
+            super.shutdownEntity();
+            for (Vm vm : getVmList()) {
+                finilizeVM(vm);
+            }
+            clearDatacenters();
+            this.setState(FINISHED);
+        }
+    }
+
     /**
      * Terminates the broker, releases all its resources and state.
      */

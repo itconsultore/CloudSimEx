@@ -64,7 +64,7 @@ public class PerformanceLoggingWebBroker extends WebBroker {
     protected void processOtherEvent(final SimEvent ev) {
         switch (ev.getTag()) {
         case LOG_TAG:
-            if (CloudSim.clock() < getLifeLength()) {
+            if (CloudSim.clock() < getLifeLength() || getLifeLength() == -1) {
                 logUtilisation();
                 send(getId(), logPeriod, LOG_TAG);
             }
