@@ -17,9 +17,16 @@ import org.junit.Test;
 
 public class DatacenterBrokerEXTest extends BaseDatacenterBrokerTest {
 
+    protected boolean noLength;
+    
+    public DatacenterBrokerEXTest() {
+        super();
+        noLength = false;
+    }
+    
     @Before
     public void setUp() throws Exception {
-        super.setUp();
+        super.setUp(this.noLength);
     }
 
     @Test

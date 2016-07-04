@@ -57,7 +57,7 @@ public abstract class BaseDatacenterBrokerTest {
         super();
     }
 
-    public void setUp() throws Exception {
+    public void setUp(boolean noLength) throws Exception {
         CustomLog.configLogger(TestUtil.LOG_PROPS);
 
         int numBrokers = 1;
@@ -68,7 +68,11 @@ public abstract class BaseDatacenterBrokerTest {
         datacenter = createDatacenterWithSingleHostAndSingleDisk("TestDatacenter");
 
         // Create Broker
-        broker = createBroker();
+        if (noLength) {
+            broker = createBrokerNoLength();
+        } else {
+            broker = createBroker();
+        }
 
         // Create virtual machines
         List<Vm> vmlist = new ArrayList<Vm>();
@@ -87,6 +91,10 @@ public abstract class BaseDatacenterBrokerTest {
 
     protected DatacenterBrokerEX createBroker() throws Exception {
         return new DatacenterBrokerEX("Broker", SIM_LENGTH);
+    }
+
+    protected DatacenterBrokerEX createBrokerNoLength() throws Exception {
+        return new DatacenterBrokerEX("Broker", -1);
     }
 
     protected Cloudlet createCloudlet(final double cloudletDuration) {

@@ -19,10 +19,16 @@ public class MonitoringBorkerEXTest extends BaseDatacenterBrokerTest {
     private static final double MONITORING_PERIOD = 0.1;
     private static final double SUMMARY_PERIOD_LEN = 5;
 
-    @Override
+    protected boolean noLength;
+    
+    public MonitoringBorkerEXTest() {
+        super();
+        noLength = false;
+    }
+    
     @Before
     public void setUp() throws Exception {
-        super.setUp();
+        super.setUp(noLength);
     }
 
     @Test
@@ -107,22 +113,22 @@ public class MonitoringBorkerEXTest extends BaseDatacenterBrokerTest {
         double delta = 0.1;
         boolean printUtilisation = false;
 
-        super.setUp();
+        super.setUp(noLength);
         testConstantUtilisation(expecteCPUUtilVM1, expecteCPUUtilVM2, delta, printUtilisation);
 
         expecteCPUUtilVM1 = 0.2;
         expecteCPUUtilVM2 = 0.1;
-        super.setUp();
+        super.setUp(noLength);
         testConstantUtilisation(expecteCPUUtilVM1, expecteCPUUtilVM2, delta, printUtilisation);
 
         expecteCPUUtilVM1 = 0.3;
         expecteCPUUtilVM2 = 0.45;
-        super.setUp();
+        super.setUp(noLength);
         testConstantUtilisation(expecteCPUUtilVM1, expecteCPUUtilVM2, delta, printUtilisation);
 
         expecteCPUUtilVM1 = 0.95;
         expecteCPUUtilVM2 = 0.85;
-        super.setUp();
+        super.setUp(noLength);
         testConstantUtilisation(expecteCPUUtilVM1, expecteCPUUtilVM2, delta, printUtilisation);
     }
 
