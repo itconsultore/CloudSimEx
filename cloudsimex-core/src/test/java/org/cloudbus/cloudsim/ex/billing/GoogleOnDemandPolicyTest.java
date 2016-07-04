@@ -28,9 +28,16 @@ import com.google.common.collect.ImmutableMap;
 
 public class GoogleOnDemandPolicyTest extends BaseDatacenterBrokerTest {
 
+    protected boolean noLength;
+    
+    public GoogleOnDemandPolicyTest() {
+        super();
+        noLength = false;
+    }
+    
     @Before
     public void setUp() throws Exception {
-        super.setUp();
+        super.setUp(noLength);
     }
 
     @Test

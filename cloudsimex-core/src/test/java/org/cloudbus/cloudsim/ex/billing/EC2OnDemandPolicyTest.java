@@ -28,9 +28,16 @@ import com.google.common.collect.ImmutableMap;
 
 public class EC2OnDemandPolicyTest extends BaseDatacenterBrokerTest {
 
+    protected boolean noLength;
+    
+    public EC2OnDemandPolicyTest() {
+        super();
+        noLength = false;
+    }
+    
     @Before
     public void setUp() throws Exception {
-        super.setUp();
+        super.setUp(noLength);
     }
 
     @Test
