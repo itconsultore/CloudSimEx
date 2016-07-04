@@ -95,6 +95,30 @@ public class DatacenterEX extends Datacenter {
         }
 
     }
+    
+    private int counter=0;
+    
+    @Override
+    protected void processCloudletMove(int[] receivedData, int type) {
+        int[] array = receivedData;
+        // int cloudletId = array[0];
+        int userId = array[1];
+        // int vmId = array[2];
+        int vmDestId = array[3];
+        int destId = array[4];
+        
+        if (destId == getId()) {
+            // Vm vm = .getVm(vmDestId,userId);
+            if (getVmAllocationPolicy().getHost(vmDestId, userId) != null) {
+                    // failed = true;
+                counter++;
+                System.out.println("counter = "+counter);
+                super.processCloudletMove(receivedData, type);
+            }
+        } else {
+            super.processCloudletMove(receivedData, type);
+        }
+    }
 
     @Override
     public String toString() {
